@@ -1,0 +1,27 @@
+<section class="connect-form" *ngIf="!connected">
+  <div>
+    <label>Enter a username:</label>
+    <input type="text" placeholder="Username" [(ngModel)]="username">
+  </div>
+  <input type="button" value="Connect" (click)="connect()">
+  <span *ngIf="connecting">Connecting..</span>
+</section>
+<section class="sendMessage-form" *ngIf="connected">
+  <div>
+    <input type="text" placeholder="Message" [(ngModel)]="message">
+  </div>
+  <div>
+    <input type="button" value="Send" (click)="send()">
+  </div>
+</section>
+<section class="messages">
+  <label>Messages:</label>
+  <div class="messages-box">
+    <ul #scrollMe>
+      <li *ngFor="let message of messages; let i = index" [class.ownMessage]="message.sender==username">
+        <small>{{(message.sender==username)?'You':message.sender}}: </small>
+        <strong>{{message.msg}}</strong>
+      </li>
+    </ul>
+  </div>
+</section>
